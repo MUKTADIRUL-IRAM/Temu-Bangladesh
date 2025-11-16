@@ -4,6 +4,10 @@ import './index.css'
 import { RouterProvider } from 'react-router-dom'
 import router from './Router/Router.jsx'
 import AuthProvider from './Provider/AuthProvider.jsx'
+import axios from 'axios'
+
+// 🔥 Global Axios config (runs before app starts)
+axios.defaults.withCredentials = true;
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
