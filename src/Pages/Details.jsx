@@ -1,10 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { FaAngleDown, FaAngleUp, FaChevronCircleLeft, FaChevronCircleRight, FaStar } from "react-icons/fa";
 import Comment from "./Comment";
+import AddToCart from "./AddToCart";
+import { IoSend } from "react-icons/io5";
+import axios from "axios";
+import { AuthContext } from "../Auth/AuthContext";
+import moment from "moment";
 
 const Details = ({prop}) => {
+    
+    const {user} = useContext(AuthContext);
 
-    const{desc,image,ratings,number_of_items_sold,sold_by,current_price,previous_price,price_drop_percentage,number_of_persons_reviewed,review,qty,star} = prop;
+    const{_id,desc,collectionName,image,ratings,number_of_items_sold,sold_by,current_price,previous_price,price_drop_percentage,number_of_persons_reviewed,review: initialReviews,qty,star} = prop;
 
     const imageList = Object.values(image || {});
 
@@ -13,6 +20,9 @@ const Details = ({prop}) => {
     const[quantity,setQuantity] = useState(null);
 
     const[thumbTop,setThumbTop] = useState(0);
+
+    // ✅ Maintain review list in state
+    const [reviews, setReviews] = useState(initialReviews || []);
   
     
     const imgColumn = useRef(null);
@@ -76,6 +86,33 @@ const Details = ({prop}) => {
     const handleSelect = (num)=>{
         setQuantity(num);
         setShowDropDown(false);
+    }
+
+    const handleComment=(e)=>{
+
+        e.preventDefault();
+        const comment = e.target.comment.value;
+
+        const newComment = { user_name:user?.displayName || "Anonymous",
+                             date:moment().format("DD/MM/YY"),
+                             comment:comment};
+//['L-shape-sofa','drone','toy-airplane','futon-sofa-bed','portable-blender','bullet-filler','mens-casual-shirt','casual-sneakers','coffee-machine','corduroy-jacket','deep-fryer','dining-table-set','electric-bike','leather-handbag','juicer-machine','cotton-long-sleeve','ss-watch-men','nintendo-switch','non-stick-pan','long-sleeve','recliner-chair','rotating-spice-rack','e-sandwich-maker','smartwatch','uv-protection-sunglass','tote-bag','grooming-trimming-set','wooden-wine-bar','premium-women-perfume','portable-bbq']
+        axios.post(`http://localhost:5000/new-comments/${_id}`,{...newComment,collection: collectionName})
+        .then((res)=>{
+            if(res.data.insertedId)
+            {
+               setReviews((prev)=>[...prev,newComment]);
+               e.target.reset();//clear input field
+            }
+            else
+            {
+               console.error("Error: backend did not return insertedId");
+            }
+        })
+        .catch((err) => {
+            console.error("Error posting comment:", err);
+        });
+
     }
 
     return (
@@ -227,8 +264,7 @@ const Details = ({prop}) => {
           {/* Add to Cart/Free Shipping */}
     <div className="flex flex-col space-y-3.5 mt-18 text-black">
                          <div className="font-semibold flex flex-col justify-center items-center w-88 h-18 rounded-3xl bg-amber-400">
-                            <div>Add to Cart</div>
-                            <div>Lowest Price Ever</div>
+                            <AddToCart id={_id} quantity={quantity}></AddToCart>
                          </div>
                          <div className="font-semibold flex flex-col justify-center items-center w-88 h-18 rounded-3xl bg-violet-400">
                              <div>Buy Now</div>
@@ -272,12 +308,19 @@ const Details = ({prop}) => {
            {/* Comments */}
            <div className="flex flex-col space-y-5">
               {
-                review.map((x,idx)=><Comment key={idx} user={x} ></Comment>)
+                reviews.map((x,idx)=><Comment key={idx} user={x}></Comment>)
               }
            </div>
 
          
-
+        <div>
+            <form onSubmit={handleComment}>
+                <fieldset className="fieldset flex space-x-3">
+                    <input className="input w-6xl h-12 my-3" type="text" name="comment"/>
+                    <button type="submit"> <IoSend size={30}></IoSend> </button>
+                </fieldset>
+            </form>
+        </div>
        
 
 

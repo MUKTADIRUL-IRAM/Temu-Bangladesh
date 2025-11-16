@@ -1,7 +1,10 @@
+//import axios from "axios";
+
 
 
 const Comment = ({user}) => {
     const{user_name,date,comment,star} = user;
+
     return (
         <div className="flex flex-col space-y-3.5">
 
@@ -14,6 +17,7 @@ const Comment = ({user}) => {
 
             <div>{comment}</div>
             <hr/>
+           
         </div>
     );
 };

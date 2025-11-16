@@ -11,6 +11,8 @@ import { transform } from "motion";
 import SlidingSection from "./SlidingSection";
 import { CiCircleChevLeft, CiCircleChevRight } from "react-icons/ci";
 import ShowCaseProducts from "./ShowCaseProducts";
+import Navbar from "../Shared/Navbar";
+import Footer from "../Shared/Footer";
 
 
 
@@ -27,13 +29,13 @@ const Home = () => {
 
     useEffect(()=>{
 
-        axios.get('http://localhost:5000/sampleproducts')
+        axios.get('https://temu-bangladesh-server.vercel.app/sampleproducts')
         .then(res=>setSampleProducts(res.data));
 
-        axios.get('http://localhost:5000/sliding-section')
+        axios.get('https://temu-bangladesh-server.vercel.app/sliding-section')
         .then(res=>setSlideName(res.data));
-
-        axios.get('http://localhost:5000/showcase-products')
+//[https://temu-bangladesh-server.vercel.app/showcase-products]
+        axios.get('http://localhost:5000/showcase-products',{withCredentials:true})
         .then(res=>setShowCaseProducts(res.data));
         
     },[]);
@@ -171,11 +173,11 @@ const Home = () => {
                   </div>
            </div>
 
-           <button className="absolute bottom-2 left-[1260px]"
+           <button className="absolute bottom-3 left-[1260px]"
            onClick={()=>handleSlideDirection('right')}>
            <CiCircleChevRight size={40}></CiCircleChevRight></button>
 
-            <button className="absolute bottom-2 right-[1260px]"
+            <button className="absolute bottom-3 right-[1260px]"
             onClick={()=>handleSlideDirection('left')}>
             <CiCircleChevLeft size={40}></CiCircleChevLeft></button>
        </div>
@@ -187,18 +189,8 @@ const Home = () => {
           }
        </div>
 
-       
-     
-
-
-
-
-        
-
-            
-
-
-        </div>
+       <div className="mt-3"> <Footer></Footer> </div>
+    </div>
     );
 };
 

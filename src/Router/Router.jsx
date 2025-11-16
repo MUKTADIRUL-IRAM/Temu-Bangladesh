@@ -5,6 +5,10 @@ import PriceDrop from "../Pages/PriceDrop";
 import BestSeller from "../Pages/BestSeller";
 import HomeSale from "../Pages/HomeSale";
 import ActivePage from "../Pages/ActivePage";
+import SearchProduct from "../Pages/SearchProduct";
+import Registration from "../Pages/Registration";
+import Login from "../Pages/Login";
+import PrivateRouter from "./PrivateRouter";
 
 
 
@@ -16,25 +20,40 @@ const router = createBrowserRouter([
     children:[
       {
          path:'/',
-         element : <Home></Home>
+         element : <PrivateRouter><Home></Home></PrivateRouter>
       },
       {
          path:'/pricedrop',
-         element:<PriceDrop></PriceDrop>
+         element:<PrivateRouter><PriceDrop></PriceDrop></PrivateRouter>
       },
       {
          path:'/bestseller',
-         element:<BestSeller></BestSeller>
+         element:<PrivateRouter><BestSeller></BestSeller></PrivateRouter>
       },
       {
          path:'/homesale',
-         element:<HomeSale></HomeSale>
+         element:<PrivateRouter><HomeSale></HomeSale></PrivateRouter>
       },
 
       {
          path:'/product/:endpoint',
-         element:<ActivePage></ActivePage>
+         element:<PrivateRouter><ActivePage></ActivePage></PrivateRouter>
       },
+      {
+         path:'/search',
+         element:<SearchProduct></SearchProduct>
+      },
+
+      {
+         path:'/registration',
+         element:<Registration></Registration>
+      },
+
+      {
+         path:'/login',
+         element:<Login></Login>
+      },
+
      
     ]
    }

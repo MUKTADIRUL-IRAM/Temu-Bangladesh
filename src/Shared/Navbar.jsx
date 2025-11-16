@@ -9,13 +9,18 @@ import leaf from "../assets/icons/leaf.png";
 import { IoIosArrowDown, IoIosArrowUp, IoMdPerson } from "react-icons/io";
 import { MdWhatsapp } from "react-icons/md";
 import { easeInOut, motion } from "motion/react";
-import { NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import Featured from "../Pages/Featured";
-import CustomScroll from "../Pages/CustomScroll";
-import Scroll from "../Pages/Scroll";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import {  useContext, useState } from "react";
+//import axios from "axios";
+//import Featured from "../Pages/Featured";
+//import CustomScroll from "../Pages/CustomScroll";
+//import Scroll from "../Pages/Scroll";
 import CategoriesMenu from "../Pages/CategoriesMenu";
+import { AuthContext } from "../Auth/AuthContext";
+import Swal from "sweetalert2";
+import { auth } from "../Provider/AuthProvider";
+//import { div } from "motion/react-client";
+
 
 
 
@@ -26,10 +31,37 @@ const Navbar = () => {
     // const[currentHeight,setCurrentHeight] = useState(0);
 
     // useEffect(()=>{
-    //       axios.get('http://localhost:5000/categories')
+    //       axios.get('https://temu-bangladesh-server.vercel.app/categories')
     //       .then(res=>setSection(res.data));
     // },[])
-   
+     
+    
+
+      const [query, setQuery] = useState("");
+      const {user,signUserOut} = useContext(AuthContext);
+     
+
+      const navigate = useNavigate();
+
+      const handleSearch = async (e)=>{
+         e.preventDefault();
+         navigate(`/search?q=${encodeURIComponent(query)}`);
+        }
+      
+        const handleSignOut = ()=>{
+            signUserOut(auth)
+            .then(()=>{
+                navigate('/login');
+                Swal.fire("Signed Out Successfully");
+                console.log("Successfully Signed Out");
+                
+            })
+            .catch((error)=>{
+                const errorMessage = error.message;
+                console.log('Error in signed out : ',errorMessage);
+                
+            })
+        }
 
     return (
         <div>
@@ -62,8 +94,8 @@ const Navbar = () => {
             </div> */}
 
           <div className="relative h-14 overflow-hidden">
-               <motion.div animate={{y:[0,-80,0]}}
-                           transition={{duration:15,repeat:Infinity,ease:"easeInOut"}} className="">
+               <motion.div animate={{y:[0,-105,0]}}
+                           transition={{duration:10,repeat:Infinity,ease:"easeInOut"}} className="">
                     <div className="h-14 hover:underline">
                         <h2>Free Returns</h2>
                         <h4>Up to 90 days</h4>
@@ -153,22 +185,15 @@ const Navbar = () => {
                             
                   </div>
 
-                   
-                    
-                 
-
-
-
-
-
-
+                
                  {/* Search Bar */}
-                  <label className="flex justify-between input rounded-3xl h-12 bg-white/20 border-2 border-solid border-[#FFF]">
+ <label className="flex justify-between input rounded-3xl h-12 bg-white/20 border-2 border-solid border-[#FFF]">
                
-                    <input className='w-48  placeholder-[#FFF]  font-semibold' type="search" required placeholder="Search" />
-                    <div className="w-13 h-10 flex justify-center items-center bg-black rounded-4xl">
+<form onSubmit={handleSearch}  className="flex justify-between items-center">
+<input className='w-48  placeholder-[#FFF]  font-semibold' type="text" value={query} onChange={(e)=>setQuery(e.target.value)}  placeholder="Search" required/>
+    <button type="submit" className="w-13 h-10 flex justify-center items-center ml-14 bg-black rounded-4xl">
 
-                         <svg className="w-[2em] h-[2em] text-[#FFFFFF]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <svg className="w-[2em] h-[2em] text-[#FFFFFF]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <g
                                 strokeLinejoin="round"
                                 strokeLinecap="round"
@@ -179,18 +204,33 @@ const Navbar = () => {
                                 <circle cx="11" cy="11" r="8"></circle>
                                 <path d="m21 21-4.3-4.3"></path>
                                 </g>
-                            </svg> 
-                    </div>
-             </label>
+    </svg> 
+    </button>
+    </form>
+</label>
 
              {/* Sign in/Register */}
-             <div className="flex  hover:w-48 hover:h-14 hover:justify-center hover:items-center hover:rounded-3xl hover:bg-fuchsia-400">
-                <IoMdPerson size={40}></IoMdPerson>
-                <div>
-                    <span>Sign in / Register</span>
-                    <p className="font-semibold">Order & Account</p>
-                </div>
+             < div className="flex items-center justify-center">
+                 <div className="flex  hover:w-48 hover:h-14 hover:justify-center hover:items-center hover:rounded-3xl hover:bg-fuchsia-400">
+                 <IoMdPerson size={70}></IoMdPerson></div>
+                  <div className="flex flex-col">
+                    {
+                        user ? 
+                        <>
+                         <span className="text-black text-center font-semibold">{user.displayName}</span>
+                         <span onClick={handleSignOut} className="bg-neutral cursor-default rounded-[5px] text-white text-center font-semibold">Sign Out</span>
+                        </> 
+                        : 
+                        <>
+                         <span><Link className="hover:underline" to={'/login'}>Sign in</Link> <span>/</span> <Link className="hover:underline" to={'/registration'}>Register</Link></span>
+                        </>
+                    }
+                     <p className="flex justify-center font-semibold hover:underline cursor-default">Order & Account</p>
+                   
+                 </div>
              </div>
+            
+           
 
              {/* Support */}
              <div className="flex space-x-1.5 items-center hover:w-24 hover:h-14 hover:justify-center hover:items-center hover:rounded-3xl hover:bg-fuchsia-400">
@@ -200,6 +240,8 @@ const Navbar = () => {
 
 
              </div>
+
+            
               
 
         </div>
