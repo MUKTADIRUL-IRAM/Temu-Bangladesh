@@ -69,7 +69,7 @@ const AuthProvider = ({children}) => {
               if(currentUser?.email)
               {
                 const userEmail = {email : currentUser.email};//req.body = {email : currentUser.email}
-                axios.post('http://localhost:5000/jwt',userEmail,{withCredentials:true})
+                axios.post('https://temu-bangladesh-server.vercel.app/jwt',userEmail,{withCredentials:true})
                 .then(res=>{
                     console.log('Login Token : ',res.data);
                     setloading(false);
@@ -82,7 +82,7 @@ const AuthProvider = ({children}) => {
               }
 
               else{
-                axios.post('http://localhost:5000/logout',{},{withCredentials:true})
+                axios.post('https://temu-bangladesh-server.vercel.app/logout',{},{withCredentials:true})
                 .then(res=>{
                     console.log("Log out : ",res.data);
                     setloading(false);

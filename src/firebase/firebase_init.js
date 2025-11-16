@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCqfXNjiCFd4Lt3xovCbotK6m0KEaeUx18",
-  authDomain: "temu-bangladesh-5b468.firebaseapp.com",
-  projectId: "temu-bangladesh-5b468",
-  storageBucket: "temu-bangladesh-5b468.firebasestorage.app",
-  messagingSenderId: "711158668527",
-  appId: "1:711158668527:web:cf9464dad433736b1e4f1a"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase

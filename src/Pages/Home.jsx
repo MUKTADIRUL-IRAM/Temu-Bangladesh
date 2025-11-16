@@ -35,7 +35,7 @@ const Home = () => {
         axios.get('https://temu-bangladesh-server.vercel.app/sliding-section')
         .then(res=>setSlideName(res.data));
 //[https://temu-bangladesh-server.vercel.app/showcase-products]
-        axios.get('http://localhost:5000/showcase-products',{withCredentials:true})
+        axios.get('https://temu-bangladesh-server.vercel.app/showcase-products',{withCredentials:true})
         .then(res=>setShowCaseProducts(res.data));
         
     },[]);

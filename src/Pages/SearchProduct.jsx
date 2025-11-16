@@ -16,7 +16,7 @@ const SearchProduct = () => {
 
     useEffect(()=>{
         if (!query) return;
-        axios.get(`http://localhost:5000/${query}`)
+        axios.get(`https://temu-bangladesh-server.vercel.app/${query}`)
         .then(res=>setResults(res.data));
     },[query]);
 
