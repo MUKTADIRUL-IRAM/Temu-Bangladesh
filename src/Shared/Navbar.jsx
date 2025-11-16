@@ -31,7 +31,7 @@ const Navbar = () => {
     // const[currentHeight,setCurrentHeight] = useState(0);
 
     // useEffect(()=>{
-    //       axios.get('https://temu-bangladesh-server.vercel.app/categories')
+    //       axios.get('https://temu-bangladesh-server.vercel.app/api/categories')
     //       .then(res=>setSection(res.data));
     // },[])
      

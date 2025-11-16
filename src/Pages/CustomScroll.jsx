@@ -12,12 +12,12 @@ const CustomScroll = ({activeCategory}) => {
       
       if(!activeCategory)
        {
-         axios.get('https://temu-bangladesh-server.vercel.app/featured')
+         axios.get('https://temu-bangladesh-server.vercel.app/api/featured')
         .then(res=>setItems(res.data))
          return;
        }
 
-        axios.get(`https://temu-bangladesh-server.vercel.app/${activeCategory}`)
+        axios.get(`https://temu-bangladesh-server.vercel.app/api/${activeCategory}`)
         .then(res=>setItems(res.data))
         .catch(err=>console.error("Error fetching category data : ",err));
         

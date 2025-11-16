@@ -8,7 +8,7 @@ const Scroll = ({setActiveCategory}) => {
      const[thumbTop,setThumpTop] = useState(0);// position of draggable bar
 
        useEffect(()=>{
-           axios.get('https://temu-bangladesh-server.vercel.app/categories')
+           axios.get('https://temu-bangladesh-server.vercel.app/api/categories')
           .then(res=>setSection(res.data));
     },[])
 

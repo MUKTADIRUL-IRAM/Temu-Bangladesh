@@ -29,13 +29,13 @@ const Home = () => {
 
     useEffect(()=>{
 
-        axios.get('https://temu-bangladesh-server.vercel.app/sampleproducts')
+        axios.get('https://temu-bangladesh-server.vercel.app/api/sampleproducts')
         .then(res=>setSampleProducts(res.data));
 
-        axios.get('https://temu-bangladesh-server.vercel.app/sliding-section')
+        axios.get('https://temu-bangladesh-server.vercel.app/api/sliding-section')
         .then(res=>setSlideName(res.data));
-//[https://temu-bangladesh-server.vercel.app/showcase-products]
-        axios.get('https://temu-bangladesh-server.vercel.app/showcase-products',{withCredentials:true})
+//[https://temu-bangladesh-server.vercel.app/api/showcase-products]
+        axios.get('https://temu-bangladesh-server.vercel.app/api/showcase-products',{withCredentials:true})
         .then(res=>setShowCaseProducts(res.data));
         
     },[]);
