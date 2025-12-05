@@ -8,7 +8,7 @@ const SlidingSection = ({slide,idx,activeSlide,setActiveSlide,setShowCaseProduct
     const handleClick = async ()=>{
         try
         {
-            const res = await axios.get(`https://temu-bangladesh-server.vercel.app/api/${endpoint}`);
+            const res = await axios.get(`https://temu-bangladesh-server.onrender.com/${endpoint}`);
             setShowCaseProducts(res.data);
         }
         catch(err)

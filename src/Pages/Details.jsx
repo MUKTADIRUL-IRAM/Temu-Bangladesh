@@ -97,7 +97,7 @@ const Details = ({prop}) => {
                              date:moment().format("DD/MM/YY"),
                              comment:comment};
 //['L-shape-sofa','drone','toy-airplane','futon-sofa-bed','portable-blender','bullet-filler','mens-casual-shirt','casual-sneakers','coffee-machine','corduroy-jacket','deep-fryer','dining-table-set','electric-bike','leather-handbag','juicer-machine','cotton-long-sleeve','ss-watch-men','nintendo-switch','non-stick-pan','long-sleeve','recliner-chair','rotating-spice-rack','e-sandwich-maker','smartwatch','uv-protection-sunglass','tote-bag','grooming-trimming-set','wooden-wine-bar','premium-women-perfume','portable-bbq']
-        axios.post(`https://temu-bangladesh-server.vercel.app/api/new-comments/${_id}`,{...newComment,collection: collectionName})
+        axios.post(`https://temu-bangladesh-server.onrender.com/new-comments/${_id}`,{...newComment,collection: collectionName})
         .then((res)=>{
             if(res.data.insertedId)
             {

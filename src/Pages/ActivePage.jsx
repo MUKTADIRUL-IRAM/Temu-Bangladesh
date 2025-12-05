@@ -9,7 +9,7 @@ const ActivePage = () => {
     const[items,setItems] = useState([]);
 
       useEffect(()=>{
-        axios.get(`https://temu-bangladesh-server.vercel.app/api/${endpoint}`)
+        axios.get(`https://temu-bangladesh-server.onrender.com/${endpoint}`)
         .then(res=>setItems(res.data))
 
       },[endpoint])
