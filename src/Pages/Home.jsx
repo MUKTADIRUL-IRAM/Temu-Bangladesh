@@ -34,7 +34,7 @@ const Home = () => {
 
         axios.get('https://temu-bangladesh-server.onrender.com/sliding-section')
         .then(res=>setSlideName(res.data));
-//[https://temu-bangladesh-server.onrender.com/showcase-products]
+
         axios.get('https://temu-bangladesh-server.onrender.com/showcase-products',{withCredentials:true})
         .then(res=>setShowCaseProducts(res.data));
         
