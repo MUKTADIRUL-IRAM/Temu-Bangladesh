@@ -6,10 +6,12 @@ import { IoSend } from "react-icons/io5";
 import axios from "axios";
 import { AuthContext } from "../Auth/AuthContext";
 import moment from "moment";
+import SslPayment from "./SslPayment";
 
 const Details = ({prop}) => {
     
     const {user} = useContext(AuthContext);
+    const [cartCount, setCartCount] = useState(0);
 
     const{_id,desc,collectionName,image,ratings,number_of_items_sold,sold_by,current_price,previous_price,price_drop_percentage,number_of_persons_reviewed,review: initialReviews,qty,star} = prop;
 
@@ -251,7 +253,7 @@ const Details = ({prop}) => {
         showDropDown ? 
         <>
             <div 
-            className="w-26 max-h-40 overflow-y-auto z-10  bg-amber-700 absolute top-29 left-10">
+            className="w-26 max-h-40 overflow-y-auto z-10  bg-amber-700 absolute top-31 left-10">
             
                 {
                     Array.from({length:qty},(_i,i)=>i+1).map((num)=>
@@ -263,8 +265,8 @@ const Details = ({prop}) => {
                     ))
                 }
             </div>
-            <FaAngleUp className="absolute top-23 left-32 z-10"></FaAngleUp>
-        </> :  <FaAngleDown className="absolute top-23 left-32 z-10"></FaAngleDown>
+            <FaAngleUp className="absolute top-27 left-32 z-10"></FaAngleUp>
+        </> :  <FaAngleDown className="absolute top-34 left-32 z-10"></FaAngleDown>
     }
 
         
@@ -275,11 +277,15 @@ const Details = ({prop}) => {
           {/* Add to Cart/Free Shipping */}
     <div className="flex flex-col space-y-3.5 mt-18 text-black">
                          <div className="font-semibold flex flex-col justify-center items-center w-88 h-18 rounded-3xl bg-amber-400">
-                            <AddToCart id={_id} quantity={quantity}></AddToCart>
+                            <AddToCart id={_id} quantity={quantity} cartCount={cartCount} setCartCount={setCartCount}></AddToCart>
                          </div>
                          <div className="font-semibold flex flex-col justify-center items-center w-88 h-18 rounded-3xl bg-violet-400">
                              <div>Buy Now</div>
                              <div>Free Shipping & Faster Dispatch</div>
+                         </div>
+                         <div className="font-semibold text-3xl flex flex-col justify-center items-center w-88 h-18 rounded-3xl bg-blue-400">
+                           {/* <p>Payment</p> */}
+                           <SslPayment price={current_price} cartCount={cartCount}></SslPayment>
                          </div>
                         
     </div>

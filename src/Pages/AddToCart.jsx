@@ -3,9 +3,9 @@ import { FaShoppingCart } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 
-const AddToCart = ({id,quantity}) => {
+const AddToCart = ({id,quantity,cartCount,setCartCount}) => {
 
-     const [cartCount, setCartCount] = useState(0); // Store total quantity in cart
+     //const [cartCount, setCartCount] = useState(0); // Store total quantity in cart
 
     // 🟢 Load cart count when component mounts.Sums up all item quantities from existing cart.
     useEffect(()=>{
@@ -19,7 +19,7 @@ const AddToCart = ({id,quantity}) => {
            setCartCount(totalQty);
         }
 
-    },[]); 
+    },[setCartCount]); 
 
     const handleAddToCart = (id)=>{
 
