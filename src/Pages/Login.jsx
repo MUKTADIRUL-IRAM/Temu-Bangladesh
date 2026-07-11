@@ -64,7 +64,7 @@ const Login = () => {
         .then((result)=>{
             const googleUser = result.user;
             console.log(googleUser);
-            if(googleUser.id)
+            if(googleUser.uid)
             {
               Swal.fire("Logged in Successfully");
             }
@@ -72,6 +72,9 @@ const Login = () => {
         .catch((error)=>{
             const errorMessage = error.message;
             console.log('Error in Google login : ',errorMessage);
+            console.log(error);
+            console.log(error.code);
+            console.log(error.message);
         })
     }
 
@@ -80,7 +83,7 @@ const Login = () => {
         .then((result)=>{
             const fbUser = result.user;
             console.log(fbUser);
-            if(fbUser.id)
+            if(fbUser.uid)
             {
                 Swal.fire("Logged in Successfully");
             }
@@ -89,6 +92,9 @@ const Login = () => {
         .catch((error)=>{
             const errorMessage = error.message;
             console.log("Error in facebook login : ",errorMessage);
+            console.log(error);
+            console.log(error.code);
+            console.log(error.message);
             
         })
     }
