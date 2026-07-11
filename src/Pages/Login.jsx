@@ -62,9 +62,9 @@ const Login = () => {
     const handleGoogle = ()=>{
         signInWithGoogle()
         .then((result)=>{
-            const user = result.user;
-            console.log(user);
-            if(user.id)
+            const googleUser = result.user;
+            console.log(googleUser);
+            if(googleUser.id)
             {
               Swal.fire("Logged in Successfully");
             }
@@ -78,9 +78,9 @@ const Login = () => {
     const handleFacebookLogin = ()=>{
         signInWithFacebook()
         .then((result)=>{
-            const user = result.user;
-            console.log(user);
-            if(user.id)
+            const fbUser = result.user;
+            console.log(fbUser);
+            if(fbUser.id)
             {
                 Swal.fire("Logged in Successfully");
             }
