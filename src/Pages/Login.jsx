@@ -1,18 +1,35 @@
 import google from "../assets/icons/Google__G__logo.svg.webp";
 import facebook from "../assets/icons/Facebook-Logo.png";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../Auth/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Login = () => {
 
-    const {signInUser,signInWithGoogle,signInWithFacebook} = useContext(AuthContext);
+    const {user,signInUser,signInWithGoogle,signInWithFacebook} = useContext(AuthContext);
 
     const navigate = useNavigate();
     const location = useLocation();
+//   location = {
+//     pathname: "/",pathname is / because you're on the login page."pathname tells you where you currently are."
+//     state: "/workspace",state remembers the page the user originally wanted."state is optional extra data passed during navigation."
+// }
     console.log(location);
     const from = location.state || '/';
+
+      //protection against already-authenticated users.
+   useEffect(() =>{
+
+   if(user){
+
+      navigate("/", {
+         replace: true
+      });
+
+   }
+
+}, [user, navigate]);
     
 
     const handleLogin = (e)=>{
