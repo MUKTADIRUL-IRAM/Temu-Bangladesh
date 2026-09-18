@@ -144,30 +144,30 @@ const Navbar = () => {
              </div>
 
              {/* 2nd Navbar */}
-             <div className="flex items-center justify-between bg-green-500">
-                <div> <img className="w-16 h-16" src={temu} alt="temulogo" /> </div>
+             <div className="flex items-center  bg-green-500">
+                <div> <img className="w-16 h-16 ml-1.5" src={temu} alt="temulogo" /> </div>
 
-                <NavLink to='/best-items' className="flex hover:w-40 hover:h-12 hover:justify-center hover:items-center hover:rounded-3xl hover:bg-fuchsia-400">
+                <NavLink to='/best-items' className="flex ml-3 hover:w-40 hover:h-8 hover:justify-center hover:items-center hover:rounded-xl hover:bg-emerald-600">
                     <AiOutlineLike size={20}></AiOutlineLike>
                     <span>Best-selling items</span>
                 </NavLink>
 
-                <NavLink to='/star-rated' className="flex hover:w-30 hover:h-14 hover:justify-center hover:items-center hover:rounded-3xl hover:bg-fuchsia-400">
+                <NavLink to='/star-rated' className="flex ml-3 hover:w-30 hover:h-8 hover:justify-center hover:items-center hover:rounded-xl hover:bg-emerald-600">
                     <RxStarFilled className="relative" size={20}></RxStarFilled>
                     <span className="">5-Star Rated</span>
                 </NavLink>
 
-                <NavLink to='/fall-arrival' className="flex hover:w-30 hover:h-14 justify-center items-center hover:rounded-3xl hover:bg-fuchsia-400">
+                <NavLink to='/fall-arrival' className="flex ml-3 hover:w-30 hover:h-8 justify-center items-center hover:rounded-xl hover:bg-emerald-600">
                     <img className="w-8 h-8" src={leaf} alt="leaf" />
                     <span className="relative">Fall Arrival</span>
                 </NavLink>
 
-                <NavLink to='/new' className="flex  hover:w-16 hover:h-14 hover:justify-center hover:items-center hover:rounded-3xl hover:bg-fuchsia-400">
+                <NavLink to='/new' className="flex ml-3 hover:w-16 hover:h-8 hover:justify-center hover:items-center hover:rounded-xl hover:bg-emerald-600">
                     <span>New In</span>
                 </NavLink>
                 
                   <div 
-                    className="relative flex hover:w-28 hover:h-14 hover:justify-center hover:items-center hover:rounded-3xl hover:bg-fuchsia-400"
+                    className="relative flex ml-3 hover:w-28 hover:h-8 hover:justify-center hover:items-center hover:rounded-xl hover:bg-emerald-600"
                     onMouseEnter={()=>setHovered(true)}
                     onMouseLeave={()=>setHovered(false)}>
 
@@ -187,7 +187,7 @@ const Navbar = () => {
 
                 
                  {/* Search Bar */}
- <label className="flex justify-between input rounded-3xl h-12 bg-white/20 border-2 border-solid border-[#FFF]">
+ <label className="flex ml-8 justify-between input rounded-3xl h-12 bg-white/20 border-2 border-solid border-[#FFF]">
                
 <form onSubmit={handleSearch}  className="flex justify-between items-center">
 <input className='w-48  placeholder-[#FFF]  font-semibold' type="text" value={query} onChange={(e)=>setQuery(e.target.value)}  placeholder="Search" required/>
@@ -210,9 +210,9 @@ const Navbar = () => {
 </label>
 
              {/* Sign in/Register */}
-             < div className="flex items-center justify-center">
-                 <div className="flex  hover:w-48 hover:h-14 hover:justify-center hover:items-center hover:rounded-3xl hover:bg-fuchsia-400">
-                 <IoMdPerson size={70}></IoMdPerson></div>
+             < div className="flex ml-8 items-center justify-center">
+                 {/* <div className="flex">
+                 <IoMdPerson size={70}></IoMdPerson></div> */}
                   <div className="flex flex-col">
                     {
                         user ? 
@@ -233,7 +233,7 @@ const Navbar = () => {
            
 
              {/* Support */}
-             <div className="flex space-x-1.5 items-center hover:w-24 hover:h-14 hover:justify-center hover:items-center hover:rounded-3xl hover:bg-fuchsia-400">
+             <div className="flex ml-6 items-center space-x-1.5 hover:w-26 hover:h-10 hover:justify-center hover:items-center hover:rounded-xl hover:bg-emerald-600">
                 <MdWhatsapp size={30}></MdWhatsapp>
                 <span>Support</span>
              </div>
