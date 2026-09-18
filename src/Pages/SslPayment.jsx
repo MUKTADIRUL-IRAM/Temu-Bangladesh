@@ -17,8 +17,8 @@ const SslPayment = ({price,cartCount}) => {
             date: moment().format("DD/MM/YY"),
             status:"pending",
 
-        };
-      const response = await axios.post("http://localhost:5000/create-ssl-payment",payment);
+        };//https://temu-bangladesh-server.onrender.com
+      const response = await axios.post("https://temu-bangladesh-server.onrender.com/create-ssl-payment",payment);//http://localhost:5000/create-ssl-payment
 
       console.log("Payment : ",response);
 
